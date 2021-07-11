@@ -52,20 +52,11 @@ def load_class_names(category_names_path):
         return json.load(f)
 
 
-def retrieve_top_k_class_names(top_k_prediction_indices, dictionary_of_class_names):
-    top_k_class_names = []
-
-    for prediction_label in top_k_prediction_indices:
-        top_k_class_names.append(dictionary_of_class_names[prediction_label])
-
-    return top_k_class_names
-
-
-def print_top_k_prediction_details(image_probs, image_classes):
+def print_result(image_probs, image_classes):
     for i, result in enumerate(image_probs):
-        print('-----[ {} ]-----'.format((i+1)))
-        print('Class name: ', image_classes[i])
-        print('Confident rate: {:.2%}'.format(result))
+        print('\n')
+        print('Label: ', image_classes[i])
+        print('Confidance: {:.2%}'.format(result))
         print('\n')
 
 
@@ -97,4 +88,4 @@ if __name__ == '__main__':
     for label in image_classes:
         processed_class_names.append(class_names[label])
 
-    print_top_k_prediction_details(image_probs, processed_class_names)
+    print_result(image_probs, processed_class_names)
